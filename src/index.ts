@@ -143,4 +143,4 @@ class Params {
 }
 
 export default Params;
-export { Param };
+export { Param, Service };

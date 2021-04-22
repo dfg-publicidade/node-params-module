@@ -12,4 +12,4 @@ declare class Params {
     getString(name: string): Param;
 }
 export default Params;
-export { Param };
+export { Param, Service };
