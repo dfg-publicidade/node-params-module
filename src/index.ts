@@ -13,130 +13,73 @@ class Params {
         this.service = service;
     }
 
+    private static parseRange(value: any, transform: (value: any, index: number) => any): any {
+        if (value.indexOf(';') > -1) {
+            const paramValue: string[] = value.split(';');
+
+            return [
+                transform(paramValue[0], 0),
+                transform(paramValue[1], 1)
+            ];
+        }
+
+        return transform(value, 0);
+    }
+
     public getInt(name: string): Param {
-        const param: Param = { name: this.service ? this.service.translateParams(name) : name };
-
-        if (this.from[name]) {
-            if (this.from[name].indexOf(';') > -1) {
-                const paramValue: string[] = this.from[name].split(';');
-
-                param.value = [
-                    parseInt(paramValue[0], 10),
-                    parseInt(paramValue[1], 10)
-                ];
-            }
-            else {
-                param.value = parseInt(this.from[name], 10);
-            }
-        }
-        else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
-        }
-
-        return param;
+        return this.getValue(name, true, (value: any): number => parseInt(value, 10));
     }
 
     public getFloat(name: string): Param {
-        const param: Param = { name: this.service ? this.service.translateParams(name) : name };
-
-        if (this.from[name]) {
-            if (this.from[name].indexOf(';') > -1) {
-                const paramValue: string[] = this.from[name].split(';');
-
-                param.value = [
-                    parseFloat(paramValue[0]),
-                    parseFloat(paramValue[1])
-                ];
-            }
-            else {
-                param.value = parseFloat(this.from[name]);
-            }
-        }
-        else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
-        }
-
-        return param;
+        return this.getValue(name, true, (value: any): number => parseFloat(value));
     }
 
     public getDate(name: string): Param {
-        const param: Param = { name: this.service ? this.service.translateParams(name) : name };
-
-        if (this.from[name]) {
-            if (this.from[name].indexOf(';') > -1) {
-                const paramValue: string[] = this.from[name].split(';');
-
-                param.value = [
-                    Dates.toDate(paramValue[0]),
-                    moment(Dates.toDate(paramValue[1])).tz(process.env.TZ).add(1, 'day').toDate()
-                ];
+        return this.getValue(name, true, (value: any, index: number): Date => {
+            if (index === 0) {
+                return Dates.toDate(value);
             }
-            else {
-                param.value = Dates.toDate(this.from[name]);
-            }
-        }
-        else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
-        }
 
-        return param;
+            return moment(Dates.toDate(value)).tz(process.env.TZ).add(1, 'day').toDate();
+        });
     }
 
     public getDateTime(name: string): Param {
-        const param: Param = { name: this.service ? this.service.translateParams(name) : name };
-
-        if (this.from[name]) {
-            if (this.from[name].indexOf(';') > -1) {
-                const paramValue: string[] = this.from[name].split(';');
-
-                param.value = [
-                    Dates.toDateTime(paramValue[0]),
-                    moment(Dates.toDate(paramValue[1])).tz(process.env.TZ).add(1, 'day').toDate()
-                ];
-            }
-            else {
-                param.value = Dates.toDateTime(this.from[name]);
-            }
-        }
-        else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
-        }
-
-        return param;
+        return this.getValue(name, true, (value: any): Date => Dates.toDateTime(value));
     }
 
     public getBoolean(name: string): Param {
-        const param: Param = { name: this.service ? this.service.translateParams(name) : name };
-
-        // eslint-disable-next-line no-null/no-null
-        if (this.from[name] !== undefined && this.from[name] !== null) {
-            if (this.from[name] && this.from[name] === 'true') {
-                param.value = true;
-            }
-            else if (this.from[name] && this.from[name] === 'false') {
-                param.value = false;
-            }
-            else {
-                param.value = undefined;
-            }
-        }
-        else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
-        }
-
-        return param;
+        return this.getValue(name, false, (value: any): boolean => value && value === 'false');
     }
 
     public getString(name: string): Param {
+        return this.getValue(name, false, (value: any): string => value);
+    }
+
+    private getValue(name: string, parseRange: boolean, transform: (value: any, index: number) => any): any {
+        if (!name) {
+            return undefined;
+        }
+
         const param: Param = { name: this.service ? this.service.translateParams(name) : name };
 
-        // eslint-disable-next-line no-null/no-null
-        param.value = this.from[name] ? this.from[name] : null;
+        if (this.from[name]) {
+            if (this.from[name] === 'null') {
+                // eslint-disable-next-line no-null/no-null
+                param.value = null;
+            }
+            else {
+                if (parseRange) {
+                    param.value = Params.parseRange(this.from[name], transform);
+                }
+                else {
+                    param.value = transform(this.from[name], 0);
+                }
+            }
+        }
+        else {
+            param.value = undefined;
+        }
 
         return param;
     }
