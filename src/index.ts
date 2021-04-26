@@ -49,7 +49,7 @@ class Params {
     }
 
     public getBoolean(name: string): Param {
-        return this.getValue(name, false, (value: any): boolean => value && value === 'true');
+        return this.getValue(name, false, (value: any): boolean => !(!value || value === 'false'));
     }
 
     public getString(name: string): Param {
