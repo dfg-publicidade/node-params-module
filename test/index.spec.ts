@@ -137,13 +137,14 @@ describe('index.ts', (): void => {
 
     it('7. getInt', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getInt('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 
@@ -223,13 +224,14 @@ describe('index.ts', (): void => {
 
     it('14. getFloat', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getFloat('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 
@@ -305,13 +307,14 @@ describe('index.ts', (): void => {
 
     it('21. getDate', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getDate('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 
@@ -387,13 +390,14 @@ describe('index.ts', (): void => {
 
     it('28. getDateTime', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getDateTime('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 
@@ -457,13 +461,14 @@ describe('index.ts', (): void => {
 
     it('34. getBoolean', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getBoolean('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 
@@ -481,13 +486,14 @@ describe('index.ts', (): void => {
 
     it('36. getString', async (): Promise<void> => {
         const params: Params = new Params({
-            'test': 'null'
+            test: 'null'
         }, service);
 
         const param: Param = params.getString('test');
 
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
+        // eslint-disable-next-line no-null/no-null
         expect(param).to.have.property('value').eq(null);
     });
 });
