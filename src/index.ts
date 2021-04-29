@@ -14,7 +14,7 @@ class Params {
     }
 
     private static parseRange(value: any, transform: (value: any, index: number) => any): any {
-        if (value.indexOf(';') > -1) {
+        if (value && value.indexOf(';') > -1) {
             const paramValue: string[] = value.split(';');
 
             return [

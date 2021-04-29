@@ -12,7 +12,7 @@ class Params {
         this.service = service;
     }
     static parseRange(value, transform) {
-        if (value.indexOf(';') > -1) {
+        if (value && value.indexOf(';') > -1) {
             const paramValue = value.split(';');
             return [
                 transform(paramValue[0], 0),
