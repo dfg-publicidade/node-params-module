@@ -66,7 +66,7 @@ class Params {
         if (this.from[name]) {
             if (this.from[name] === 'null') {
                 // eslint-disable-next-line no-null/no-null
-                param.value = null;
+                param.value = 'null';
             }
             else {
                 if (parseRange) {
