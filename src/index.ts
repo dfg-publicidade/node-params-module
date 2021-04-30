@@ -70,10 +70,10 @@ class Params {
             }
             else {
                 if (parseRange) {
-                    param.value = Params.parseRange(this.from[name], transform);
+                    param.value = Params.parseRange(this.from[name].toString(), transform);
                 }
                 else {
-                    param.value = transform(this.from[name], 0);
+                    param.value = transform(this.from[name].toString(), 0);
                 }
             }
         }
