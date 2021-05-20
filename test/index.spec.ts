@@ -145,7 +145,7 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 
     it('8. getFloat', async (): Promise<void> => {
@@ -232,7 +232,7 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 
     it('15. getDate', async (): Promise<void> => {
@@ -315,7 +315,7 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 
     it('22. getDateTime', async (): Promise<void> => {
@@ -398,7 +398,7 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 
     it('29. getBoolean', async (): Promise<void> => {
@@ -469,7 +469,7 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 
     it('35. getString', async (): Promise<void> => {
@@ -494,6 +494,6 @@ describe('index.ts', (): void => {
         expect(param).to.exist;
         expect(param).to.have.property('name').eq('test');
         // eslint-disable-next-line no-null/no-null
-        expect(param).to.have.property('value').eq('null');
+        expect(param).to.have.property('value').null;
     });
 });
