@@ -56,12 +56,16 @@ class Params {
         return this.getValue(name, false, (value: any): string => value);
     }
 
-    private getValue(name: string, parseRange: boolean, transform: (value: any, index: number) => any): any {
+    private getValue(name: string, parseRange: boolean, transform: (value: any, index: number) => any): Param {
         if (!name) {
             return undefined;
         }
 
         const param: Param = { name: this.service ? this.service.translateParams(name) : name };
+
+        if (!param.name) {
+            return undefined;
+        }
 
         if (this.from[name]) {
             if (this.from[name] === 'null') {

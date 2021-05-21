@@ -49,6 +49,9 @@ class Params {
             return undefined;
         }
         const param = { name: this.service ? this.service.translateParams(name) : name };
+        if (!param.name) {
+            return undefined;
+        }
         if (this.from[name]) {
             if (this.from[name] === 'null') {
                 // eslint-disable-next-line no-null/no-null
