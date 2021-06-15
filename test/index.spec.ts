@@ -5,6 +5,7 @@ import Params, { Param, Service } from '../src';
 /* Tests */
 describe('index.ts', (): void => {
     let service: Service;
+    let invalidService: Service;
 
     let testDate: Date;
     let testDate2: Date;
@@ -20,6 +21,9 @@ describe('index.ts', (): void => {
 
                 return keyPart;
             }).join('')
+        };
+        invalidService = {
+            translateParams: (key: string): string => undefined
         };
 
         testDate = new Date();
@@ -71,6 +75,16 @@ describe('index.ts', (): void => {
         });
 
         const param: Param = params.getInt(undefined);
+
+        expect(param).to.be.undefined;
+    });
+
+    it('1. getInt', async (): Promise<void> => {
+        const params: Params = new Params({
+            test: '1'
+        }, invalidService);
+
+        const param: Param = params.getInt('test');
 
         expect(param).to.be.undefined;
     });
