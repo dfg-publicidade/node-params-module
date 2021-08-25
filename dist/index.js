@@ -67,8 +67,7 @@ class Params {
             }
         }
         else {
-            // eslint-disable-next-line no-null/no-null
-            param.value = null;
+            param.value = undefined;
         }
         return param;
     }
