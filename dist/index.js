@@ -39,7 +39,7 @@ class Params {
         return this.getValue(name, true, (value) => node_dates_module_1.default.toDateTime(value));
     }
     getBoolean(name) {
-        return this.getValue(name, false, (value) => !(!value || value === 'false'));
+        return this.getValue(name, false, (value) => !(!value || value === 'false' || value === 'undefined'));
     }
     getString(name) {
         return this.getValue(name, false, (value) => value);
