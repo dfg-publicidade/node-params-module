@@ -32,7 +32,7 @@ class Params {
             if (index === 0) {
                 return node_dates_module_1.default.toDate(value);
             }
-            return moment_timezone_1.default(node_dates_module_1.default.toDate(value)).tz(process.env.TZ).add(1, 'day').toDate();
+            return (0, moment_timezone_1.default)(node_dates_module_1.default.toDate(value)).tz(process.env.TZ).add(1, 'day').toDate();
         });
     }
     getDateTime(name) {
